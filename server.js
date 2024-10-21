@@ -11,14 +11,19 @@ mongoose.connection.on("connected",()=>{
 });
 
 const Plant = require("./models/plant.js");
+app.use(express.urlencoded({ extended: false }));
+
 app.get("/", async (req, res) => {
   res.render("index.ejs");
 });
 
-app.get('/plants/new', (req, res) =>{
+app.get('/plants/new', async (req, res) =>{
   res.render("plants/new.ejs");
 });
-
+app.post('/plants', async (req, res)=>{
+  await Plant.create(req.body)
+  res.redirect("/plants/new");
+});
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
