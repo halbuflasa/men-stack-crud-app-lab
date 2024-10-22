@@ -6,15 +6,20 @@
     <title>Edit a Plant</title>
 </head>
 <body>
-    <h1>Edit Edit <%= plant.name %>/h1>
+    <h1>Edit <%= plant.name %></h1>
     <form action="/plants/<%=plant._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" value="<%= plant.name %>" />
 
         <label for="description">Description:</label>
-        <textarea name="description" id="description" value="<%= plant.description %>"></textarea>
+        <textarea name="description" id="description"><%= plant.description %></textarea>
 
-        <label for="image">Image:</label>
+        <label for="image">Current Image:</label>
+        <% if (plant.image) { %>
+            <img src="/uploads/<%= plant.image %>" alt="<%= plant.name %>" style="max-width: 150px;" />
+        <% } %>
+
+        <label for="image">New Image:</label>
         <input type="file" name="image" id="image" accept="image/*" />
 
         <button type="submit">Update Plant</button>

@@ -78,14 +78,17 @@ app.get("/plants/:plantId/edit", async (req, res) => {
   });
 });
 
+app.put("/plants/:plantId", upload.single("image"), async (req, res) => {
+  const plantData = {
+    name: req.body.name,
+    description: req.body.description,
+    image: req.file ? req.file.filename : req.body.existingImage, // Use the new file if uploaded, otherwise keep the existing image
+  };
 
-app.put("/plants/:plantId", async (req, res) => {
- 
-  await Plant.findByIdAndUpdate(req.params.plantId, req.body);
-
-  
+  await Plant.findByIdAndUpdate(req.params.plantId, plantData);
   res.redirect(`/plants/${req.params.plantId}`);
 });
+
 
 app.listen(3000, () => {
   console.log("Listening on port 3000");
