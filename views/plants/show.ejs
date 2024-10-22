@@ -14,7 +14,9 @@
     <% } else { %>
         <p>No image available.</p>
     <% } %>
-
+    <form action="/plants/<%=plant._id%>?_method=DELETE" method="POST">
+        <button type="submit">Delete <%= plant.name %></button>
+      </form>
     <a href="/plants">Back to Plants</a>
 </body>
 </html>

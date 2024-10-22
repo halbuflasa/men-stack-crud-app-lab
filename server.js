@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const app = express();
+const methodOverride = require("method-override"); 
+const morgan = require("morgan"); 
 
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on("connected", () => {
@@ -13,7 +15,8 @@ mongoose.connection.on("connected", () => {
 
 const Plant = require("./models/plant.js");
 app.use(express.urlencoded({ extended: false }));
-
+app.use(methodOverride("_method")); 
+app.use(morgan("dev")); 
 /////////////////////IMAGES///////////////////
 // Define the multer storage configuration
 const storage = multer.diskStorage({
@@ -61,6 +64,11 @@ app.post("/plants", upload.single("image"), async (req, res) => {
   await Plant.create(plantData);
   res.redirect("/plants");
 });
+app.delete("/plants/:plantId", async (req, res) => {
+  await Plant.findByIdAndDelete(req.params.plantId);
+  res.redirect("/plants");
+});
+
 
 app.listen(3000, () => {
   console.log("Listening on port 3000");
