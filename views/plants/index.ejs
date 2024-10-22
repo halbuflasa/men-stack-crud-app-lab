@@ -10,7 +10,7 @@
     <h1>All Plants</h1>
     <ul>
        <% plants.forEach(plant=>{ %>
-            <li><%=plant.name%></li>
+            <li><a href="/plants/<%= plant._id %>"><%=plant.name%></a></li>
         <%});%>
     </ul>
 </body>
