@@ -16,7 +16,8 @@
     <% } %>
     <form action="/plants/<%=plant._id%>?_method=DELETE" method="POST">
         <button type="submit">Delete <%= plant.name %></button>
-      </form>
+    </form>
+    <a href="/plants/<%= plant._id %>/edit">Edit <%= plant.name %></a>
     <a href="/plants">Back to Plants</a>
 </body>
 </html>

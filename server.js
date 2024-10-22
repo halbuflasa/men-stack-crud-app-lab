@@ -64,9 +64,18 @@ app.post("/plants", upload.single("image"), async (req, res) => {
   await Plant.create(plantData);
   res.redirect("/plants");
 });
+
 app.delete("/plants/:plantId", async (req, res) => {
   await Plant.findByIdAndDelete(req.params.plantId);
   res.redirect("/plants");
+});
+
+
+app.get("/plants/:plantId/edit", async (req, res) => {
+  const foundPlant= await Plant.findById(req.params.plantId);
+  res.render("plants/edit.ejs", {
+    plant: foundPlant,
+  });
 });
 
 
