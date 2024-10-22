@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plants Index</title>
+</head>
+<body>
+    <a href="/plants/new">Add New Plant</a>
+    <h1>All Plants</h1>
+    <ul>
+       <% plants.forEach(plant=>{ %>
+            <li><%=plant.name%></li>
+        <%});%>
+    </ul>
+</body>
+</html>

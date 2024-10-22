@@ -17,13 +17,20 @@ app.get("/", async (req, res) => {
   res.render("index.ejs");
 });
 
+app.get("/plants", async (req, res) => {
+  const allPlants = await Plant.find();
+  console.log(allPlants); 
+  res.render("plants/index.ejs", { plants: allPlants });
+});
+
 app.get('/plants/new', async (req, res) =>{
   res.render("plants/new.ejs");
 });
 app.post('/plants', async (req, res)=>{
   await Plant.create(req.body)
-  res.redirect("/plants/new");
+  res.redirect("/plants");
 });
+
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
