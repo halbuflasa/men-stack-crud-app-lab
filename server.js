@@ -79,6 +79,14 @@ app.get("/plants/:plantId/edit", async (req, res) => {
 });
 
 
+app.put("/plants/:plantId", async (req, res) => {
+ 
+  await Plant.findByIdAndUpdate(req.params.plantId, req.body);
+
+  
+  res.redirect(`/plants/${req.params.plantId}`);
+});
+
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
